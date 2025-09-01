@@ -1,5 +1,5 @@
 # Global Underwriting - Project Status Report
-**Generated:** 2025-09-01 18:30:44
+**Generated:** 2025-09-01 20:01:01
 
 ## 📊 Project Summary
 
@@ -76,105 +76,105 @@
 
 ## 📋 All Tickets
 
-| Key | Summary | Status | Priority | Assignee | Type | Created | Updated | Due Date |
-|-----|---------|---------|----------|----------|------|---------|---------|----------|
-| GLO-1 | Setup infrastructure | ✅ Done | ⚪ Minor | Paul van Coller | Story | 2025-08-22 | 2025-09-01 | - |
-| GLO-2 | Environment Setup | 📋 To Do | ⚪ Minor | Andrew Weddell | Epic | 2025-08-25 | 2025-08-25 | - |
-| GLO-255 | Foundation & Planning | 📋 To Do | ⚪ Minor | Andrew Weddell | Epic | 2025-08-25 | 2025-09-01 | 2025-09-05 |
-| GLO-256 | Core Platform Configuration | 📋 To Do | ⚪ Minor | Andrew Weddell | Epic | 2025-08-25 | 2025-08-25 | - |
-| GLO-257 | Product Implementation | 📋 To Do | ⚪ Minor | Andrew Weddell | Epic | 2025-08-25 | 2025-08-25 | - |
-| GLO-258 | Integration & Testing | 📋 To Do | ⚪ Minor | Andrew Weddell | Epic | 2025-08-25 | 2025-08-25 | - |
-| GLO-259 | Training & Go-Live | 📋 To Do | ⚪ Minor | Andrew Weddell | Epic | 2025-08-25 | 2025-08-25 | - |
-| GLO-260 | Compliance & Operations | 📋 To Do | ⚪ Minor | Andrew Weddell | Epic | 2025-08-25 | 2025-08-25 | - |
-| GLO-263 | Define project scope, objectives, and responsibili... | 🔄 In Progress | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | 2025-09-04 |
-| GLO-264 | Set up project tracking in Jira | ✅ Done | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | 2025-09-05 |
-| GLO-265 | Configure Confluence space | ✅ Done | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-266 | Schedule kickoff meeting with stakeholders | ✅ Done | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-267 | Define communication plan and cadence | ✅ Done | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-268 | Review and validate product specifications (GL inc... | 📋 Groomed | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | 2025-09-04 |
-| GLO-269 | Document business operating processes | 📋 Groomed | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | 2025-09-03 |
-| GLO-270 | Confirm rating models and pricing logic | 📋 Groomed | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | 2025-09-03 |
-| GLO-271 | Review policy wordings and endorsements | 📋 Groomed | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | 2025-09-03 |
-| GLO-272 | Validate quotation questions and lookup lists | 📋 Groomed | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | 2025-09-03 |
-| GLO-273 | Produce technical design for product configuration | 📋 Groomed | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | 2025-09-05 |
-| GLO-274 | Design system architecture and integrations | 📋 Groomed | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | 2025-09-05 |
-| GLO-275 | Document transition approach for existing policies | ✅ Done | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-276 | Design user roles and permissions structure | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | 2025-09-05 |
-| GLO-277 | Define automated and manual testing approach | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-279 | Design bank statement import process (Macquarie) | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-280 | Define extract formats for financial systems | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-281 | Document bordereaux reporting requirements | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-282 | Confirm reporting requirements | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-285 | Configure production environment | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-287 | Implement backup and disaster recovery | 📋 To Do | ⚪ Minor | Paul van Coller | Story | 2025-08-25 | 2025-09-01 | 2025-09-05 |
-| GLO-288 | Configure base Appsure instance | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-289 | Set up user roles and permissions | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-290 | Configure workflow engine | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-291 | Set up document templates | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-292 | Configure communication templates | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-293 | Configure GL product structure | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-294 | Implement GL rating | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-295 | Set up GL quotation flow | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-296 | Configure GL policy documents | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-297 | Set up GL/Fire endorsements | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-298 | Set up occupation-based rules | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-299 | Configure coverage limits | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-3 | Add Kim Brew to Teams -->  Kim.Brew@awib.com.au | ✅ Done | ⚪ Minor | Paul van Coller | Story | 2025-08-25 | 2025-08-25 | - |
-| GLO-300 | Configure billing processes | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-301 | Set up stamp duty calculations | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-302 | Configure withholding tax | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-303 | Implement cash allocation rules | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-304 | Set up debtor management | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-305 | Configure PI product structure | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-306 | Implement PI rating engine | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-307 | Set up PI quotation flow | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-308 | Configure PI policy documents | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-309 | Set up PI endorsements | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-312 | Implement quote and apply workflows | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-315 | Configure document templates for both products | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-316 | Set up automated workflows | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-317 | Configure referral rules | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-318 | Set up approval hierarchies | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-319 | Configure notification settings | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-320 | Implement back-office system extracts | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-321 | Configure bank statement import | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-322 | Set up management reporting (KPIs) | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-323 | Implement bordereaux reporting | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-324 | Test all integration points | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-325 | Execute unit tests for all products | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-326 | Perform integration testing | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-327 | Conduct workflow testing | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-328 | Test document generation | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-329 | Validate financial calculations | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-330 | Prepare UAT scenarios | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-331 | Train UAT participants | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-332 | Execute UAT test cases | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-333 | Track and resolve defects | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-334 | Obtain UAT sign-off | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-335 | Develop training materials | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-336 | Conduct underwriter training | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-337 | Train finance team | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-338 | Train broker support team | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-339 | Create user documentation | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-340 | Finalize production environment | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-341 | Complete security audit | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-342 | Perform final smoke testing | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-343 | Create go-live runsheet | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-344 | Implement cutover plan | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-345 | Monitor system performance | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-346 | Provide hypercare support | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-347 | Address production issues | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-348 | Conduct post-implementation review | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-349 | Transition to BAU support | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
-| GLO-351 | Implement data privacy controls | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-08-25 | - |
-| GLO-352 | Configure audit logging | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-08-25 | - |
-| GLO-353 | Set up security monitoring | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-08-25 | - |
-| GLO-354 | Document compliance measures | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-08-25 | - |
-| GLO-355 | Configure performance monitoring | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-08-25 | - |
-| GLO-356 | Set up alerting thresholds | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-08-25 | - |
-| GLO-357 | Implement disaster recovery | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-08-25 | - |
-| GLO-358 | Test failover procedures | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-08-25 | - |
-| GLO-359 | Document SLAs | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | 2025-08-25 | 2025-09-01 | - |
+| Key | Summary | Status | Priority | Assignee | Type | Epic/Parent | Created | Updated | Due Date |
+|-----|---------|---------|----------|----------|------|---------|---------|---------|----------|
+| GLO-1 | Setup infrastructure | ✅ Done | ⚪ Minor | Paul van Coller | Story | GLO-2: Environment Setup | 2025-08-22 | 2025-09-01 | - |
+| GLO-2 | Environment Setup | 📋 To Do | ⚪ Minor | Andrew Weddell | Epic | - | 2025-08-25 | 2025-08-25 | - |
+| GLO-255 | Foundation & Planning | 📋 To Do | ⚪ Minor | Andrew Weddell | Epic | - | 2025-08-25 | 2025-09-01 | 2025-09-05 |
+| GLO-256 | Core Platform Configuration | 📋 To Do | ⚪ Minor | Andrew Weddell | Epic | - | 2025-08-25 | 2025-08-25 | - |
+| GLO-257 | Product Implementation | 📋 To Do | ⚪ Minor | Andrew Weddell | Epic | - | 2025-08-25 | 2025-08-25 | - |
+| GLO-258 | Integration & Testing | 📋 To Do | ⚪ Minor | Andrew Weddell | Epic | - | 2025-08-25 | 2025-08-25 | - |
+| GLO-259 | Training & Go-Live | 📋 To Do | ⚪ Minor | Andrew Weddell | Epic | - | 2025-08-25 | 2025-08-25 | - |
+| GLO-260 | Compliance & Operations | 📋 To Do | ⚪ Minor | Andrew Weddell | Epic | - | 2025-08-25 | 2025-08-25 | - |
+| GLO-263 | Define project scope, objectives, and responsibili... | 🔄 In Progress | ⚪ Minor | Andrew Weddell | Story | GLO-255: Foundation & Planning | 2025-08-25 | 2025-09-01 | 2025-09-04 |
+| GLO-264 | Set up project tracking in Jira | ✅ Done | ⚪ Minor | Andrew Weddell | Story | GLO-255: Foundation & Planning | 2025-08-25 | 2025-09-01 | 2025-09-05 |
+| GLO-265 | Configure Confluence space | ✅ Done | ⚪ Minor | Andrew Weddell | Story | GLO-255: Foundation & Planning | 2025-08-25 | 2025-09-01 | - |
+| GLO-266 | Schedule kickoff meeting with stakeholders | ✅ Done | ⚪ Minor | Andrew Weddell | Story | GLO-255: Foundation & Planning | 2025-08-25 | 2025-09-01 | - |
+| GLO-267 | Define communication plan and cadence | ✅ Done | ⚪ Minor | Andrew Weddell | Story | GLO-255: Foundation & Planning | 2025-08-25 | 2025-09-01 | - |
+| GLO-268 | Review and validate product specifications (GL inc... | 📋 Groomed | ⚪ Minor | Andrew Weddell | Story | GLO-255: Foundation & Planning | 2025-08-25 | 2025-09-01 | 2025-09-04 |
+| GLO-269 | Document business operating processes | 📋 Groomed | ⚪ Minor | Andrew Weddell | Story | GLO-255: Foundation & Planning | 2025-08-25 | 2025-09-01 | 2025-09-03 |
+| GLO-270 | Confirm rating models and pricing logic | 📋 Groomed | ⚪ Minor | Andrew Weddell | Story | GLO-255: Foundation & Planning | 2025-08-25 | 2025-09-01 | 2025-09-03 |
+| GLO-271 | Review policy wordings and endorsements | 📋 Groomed | ⚪ Minor | Andrew Weddell | Story | GLO-255: Foundation & Planning | 2025-08-25 | 2025-09-01 | 2025-09-03 |
+| GLO-272 | Validate quotation questions and lookup lists | 📋 Groomed | ⚪ Minor | Andrew Weddell | Story | GLO-255: Foundation & Planning | 2025-08-25 | 2025-09-01 | 2025-09-03 |
+| GLO-273 | Produce technical design for product configuration | 📋 Groomed | ⚪ Minor | Andrew Weddell | Story | GLO-255: Foundation & Planning | 2025-08-25 | 2025-09-01 | 2025-09-05 |
+| GLO-274 | Design system architecture and integrations | 📋 Groomed | ⚪ Minor | Andrew Weddell | Story | GLO-255: Foundation & Planning | 2025-08-25 | 2025-09-01 | 2025-09-05 |
+| GLO-275 | Document transition approach for existing policies | ✅ Done | ⚪ Minor | Andrew Weddell | Story | GLO-255: Foundation & Planning | 2025-08-25 | 2025-09-01 | - |
+| GLO-276 | Design user roles and permissions structure | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-255: Foundation & Planning | 2025-08-25 | 2025-09-01 | 2025-09-05 |
+| GLO-277 | Define automated and manual testing approach | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-255: Foundation & Planning | 2025-08-25 | 2025-09-01 | - |
+| GLO-279 | Design bank statement import process (Macquarie) | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-255: Foundation & Planning | 2025-08-25 | 2025-09-01 | - |
+| GLO-280 | Define extract formats for financial systems | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-255: Foundation & Planning | 2025-08-25 | 2025-09-01 | - |
+| GLO-281 | Document bordereaux reporting requirements | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-255: Foundation & Planning | 2025-08-25 | 2025-09-01 | - |
+| GLO-282 | Confirm reporting requirements | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-255: Foundation & Planning | 2025-08-25 | 2025-09-01 | - |
+| GLO-285 | Configure production environment | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-256: Core Platform Configuration | 2025-08-25 | 2025-09-01 | - |
+| GLO-287 | Implement backup and disaster recovery | 📋 To Do | ⚪ Minor | Paul van Coller | Story | GLO-255: Foundation & Planning | 2025-08-25 | 2025-09-01 | 2025-09-05 |
+| GLO-288 | Configure base Appsure instance | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-256: Core Platform Configuration | 2025-08-25 | 2025-09-01 | - |
+| GLO-289 | Set up user roles and permissions | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-256: Core Platform Configuration | 2025-08-25 | 2025-09-01 | - |
+| GLO-290 | Configure workflow engine | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-256: Core Platform Configuration | 2025-08-25 | 2025-09-01 | - |
+| GLO-291 | Set up document templates | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-256: Core Platform Configuration | 2025-08-25 | 2025-09-01 | - |
+| GLO-292 | Configure communication templates | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-256: Core Platform Configuration | 2025-08-25 | 2025-09-01 | - |
+| GLO-293 | Configure GL product structure | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-256: Core Platform Configuration | 2025-08-25 | 2025-09-01 | - |
+| GLO-294 | Implement GL rating | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-256: Core Platform Configuration | 2025-08-25 | 2025-09-01 | - |
+| GLO-295 | Set up GL quotation flow | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-256: Core Platform Configuration | 2025-08-25 | 2025-09-01 | - |
+| GLO-296 | Configure GL policy documents | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-256: Core Platform Configuration | 2025-08-25 | 2025-09-01 | - |
+| GLO-297 | Set up GL/Fire endorsements | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-256: Core Platform Configuration | 2025-08-25 | 2025-09-01 | - |
+| GLO-298 | Set up occupation-based rules | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-256: Core Platform Configuration | 2025-08-25 | 2025-09-01 | - |
+| GLO-299 | Configure coverage limits | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-256: Core Platform Configuration | 2025-08-25 | 2025-09-01 | - |
+| GLO-3 | Add Kim Brew to Teams -->  Kim.Brew@awib.com.au | ✅ Done | ⚪ Minor | Paul van Coller | Story | GLO-2: Environment Setup | 2025-08-25 | 2025-08-25 | - |
+| GLO-300 | Configure billing processes | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-256: Core Platform Configuration | 2025-08-25 | 2025-09-01 | - |
+| GLO-301 | Set up stamp duty calculations | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-256: Core Platform Configuration | 2025-08-25 | 2025-09-01 | - |
+| GLO-302 | Configure withholding tax | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-256: Core Platform Configuration | 2025-08-25 | 2025-09-01 | - |
+| GLO-303 | Implement cash allocation rules | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-256: Core Platform Configuration | 2025-08-25 | 2025-09-01 | - |
+| GLO-304 | Set up debtor management | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-256: Core Platform Configuration | 2025-08-25 | 2025-09-01 | - |
+| GLO-305 | Configure PI product structure | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-257: Product Implementation | 2025-08-25 | 2025-09-01 | - |
+| GLO-306 | Implement PI rating engine | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-257: Product Implementation | 2025-08-25 | 2025-09-01 | - |
+| GLO-307 | Set up PI quotation flow | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-257: Product Implementation | 2025-08-25 | 2025-09-01 | - |
+| GLO-308 | Configure PI policy documents | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-257: Product Implementation | 2025-08-25 | 2025-09-01 | - |
+| GLO-309 | Set up PI endorsements | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-257: Product Implementation | 2025-08-25 | 2025-09-01 | - |
+| GLO-312 | Implement quote and apply workflows | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-257: Product Implementation | 2025-08-25 | 2025-09-01 | - |
+| GLO-315 | Configure document templates for both products | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-257: Product Implementation | 2025-08-25 | 2025-09-01 | - |
+| GLO-316 | Set up automated workflows | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-257: Product Implementation | 2025-08-25 | 2025-09-01 | - |
+| GLO-317 | Configure referral rules | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-257: Product Implementation | 2025-08-25 | 2025-09-01 | - |
+| GLO-318 | Set up approval hierarchies | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-257: Product Implementation | 2025-08-25 | 2025-09-01 | - |
+| GLO-319 | Configure notification settings | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-257: Product Implementation | 2025-08-25 | 2025-09-01 | - |
+| GLO-320 | Implement back-office system extracts | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-258: Integration & Testing | 2025-08-25 | 2025-09-01 | - |
+| GLO-321 | Configure bank statement import | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-258: Integration & Testing | 2025-08-25 | 2025-09-01 | - |
+| GLO-322 | Set up management reporting (KPIs) | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-258: Integration & Testing | 2025-08-25 | 2025-09-01 | - |
+| GLO-323 | Implement bordereaux reporting | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-258: Integration & Testing | 2025-08-25 | 2025-09-01 | - |
+| GLO-324 | Test all integration points | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-258: Integration & Testing | 2025-08-25 | 2025-09-01 | - |
+| GLO-325 | Execute unit tests for all products | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-258: Integration & Testing | 2025-08-25 | 2025-09-01 | - |
+| GLO-326 | Perform integration testing | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-258: Integration & Testing | 2025-08-25 | 2025-09-01 | - |
+| GLO-327 | Conduct workflow testing | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-258: Integration & Testing | 2025-08-25 | 2025-09-01 | - |
+| GLO-328 | Test document generation | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-258: Integration & Testing | 2025-08-25 | 2025-09-01 | - |
+| GLO-329 | Validate financial calculations | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-258: Integration & Testing | 2025-08-25 | 2025-09-01 | - |
+| GLO-330 | Prepare UAT scenarios | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-258: Integration & Testing | 2025-08-25 | 2025-09-01 | - |
+| GLO-331 | Train UAT participants | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-258: Integration & Testing | 2025-08-25 | 2025-09-01 | - |
+| GLO-332 | Execute UAT test cases | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-258: Integration & Testing | 2025-08-25 | 2025-09-01 | - |
+| GLO-333 | Track and resolve defects | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-258: Integration & Testing | 2025-08-25 | 2025-09-01 | - |
+| GLO-334 | Obtain UAT sign-off | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-258: Integration & Testing | 2025-08-25 | 2025-09-01 | - |
+| GLO-335 | Develop training materials | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-259: Training & Go-Live | 2025-08-25 | 2025-09-01 | - |
+| GLO-336 | Conduct underwriter training | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-259: Training & Go-Live | 2025-08-25 | 2025-09-01 | - |
+| GLO-337 | Train finance team | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-259: Training & Go-Live | 2025-08-25 | 2025-09-01 | - |
+| GLO-338 | Train broker support team | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-259: Training & Go-Live | 2025-08-25 | 2025-09-01 | - |
+| GLO-339 | Create user documentation | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-259: Training & Go-Live | 2025-08-25 | 2025-09-01 | - |
+| GLO-340 | Finalize production environment | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-259: Training & Go-Live | 2025-08-25 | 2025-09-01 | - |
+| GLO-341 | Complete security audit | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-259: Training & Go-Live | 2025-08-25 | 2025-09-01 | - |
+| GLO-342 | Perform final smoke testing | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-259: Training & Go-Live | 2025-08-25 | 2025-09-01 | - |
+| GLO-343 | Create go-live runsheet | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-259: Training & Go-Live | 2025-08-25 | 2025-09-01 | - |
+| GLO-344 | Implement cutover plan | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-259: Training & Go-Live | 2025-08-25 | 2025-09-01 | - |
+| GLO-345 | Monitor system performance | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-259: Training & Go-Live | 2025-08-25 | 2025-09-01 | - |
+| GLO-346 | Provide hypercare support | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-259: Training & Go-Live | 2025-08-25 | 2025-09-01 | - |
+| GLO-347 | Address production issues | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-259: Training & Go-Live | 2025-08-25 | 2025-09-01 | - |
+| GLO-348 | Conduct post-implementation review | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-259: Training & Go-Live | 2025-08-25 | 2025-09-01 | - |
+| GLO-349 | Transition to BAU support | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-259: Training & Go-Live | 2025-08-25 | 2025-09-01 | - |
+| GLO-351 | Implement data privacy controls | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-260: Compliance & Operations | 2025-08-25 | 2025-08-25 | - |
+| GLO-352 | Configure audit logging | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-260: Compliance & Operations | 2025-08-25 | 2025-08-25 | - |
+| GLO-353 | Set up security monitoring | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-260: Compliance & Operations | 2025-08-25 | 2025-08-25 | - |
+| GLO-354 | Document compliance measures | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-260: Compliance & Operations | 2025-08-25 | 2025-08-25 | - |
+| GLO-355 | Configure performance monitoring | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-260: Compliance & Operations | 2025-08-25 | 2025-08-25 | - |
+| GLO-356 | Set up alerting thresholds | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-260: Compliance & Operations | 2025-08-25 | 2025-08-25 | - |
+| GLO-357 | Implement disaster recovery | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-260: Compliance & Operations | 2025-08-25 | 2025-08-25 | - |
+| GLO-358 | Test failover procedures | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-260: Compliance & Operations | 2025-08-25 | 2025-08-25 | - |
+| GLO-359 | Document SLAs | 📋 To Do | ⚪ Minor | Andrew Weddell | Story | GLO-260: Compliance & Operations | 2025-08-25 | 2025-09-01 | - |
 
 ## 📝 Detailed Ticket Information
 
@@ -2046,6 +2046,6 @@ Create service level agreements and operational documentation
 
 ## 📋 Report Information
 
-- **Report Generated:** 2025-09-01 18:30:44
+- **Report Generated:** 2025-09-01 20:01:01
 - **Total Tickets Analyzed:** 97
 - **Generated by:** Global Underwriting Jira Integration Application

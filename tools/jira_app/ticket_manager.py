@@ -95,6 +95,9 @@ class MarkdownReportGenerator:
         summary = cls.generate_project_summary(tickets)
         report_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         
+        # Create a lookup map for ticket keys to summaries for better parent/epic display
+        ticket_lookup = {ticket['key']: ticket['summary'] for ticket in tickets}
+        
         # Start building the markdown content
         md = []
         md.append(f"# {project_name} - Project Status Report")
@@ -155,8 +158,8 @@ class MarkdownReportGenerator:
         # All Tickets Table
         md.append("## 📋 All Tickets")
         md.append("")
-        md.append("| Key | Summary | Status | Priority | Assignee | Type | Created | Updated | Due Date |")
-        md.append("|-----|---------|---------|----------|----------|------|---------|---------|----------|")
+        md.append("| Key | Summary | Status | Priority | Assignee | Type | Epic/Parent | Created | Updated | Due Date |")
+        md.append("|-----|---------|---------|----------|----------|------|---------|---------|---------|----------|")
         
         for ticket in sorted(tickets, key=lambda x: x['key']):
             status_emoji = cls.get_status_emoji(ticket['status'])
@@ -168,6 +171,28 @@ class MarkdownReportGenerator:
             priority = f"{priority_emoji} {ticket.get('priority', 'Not set')}"
             assignee = ticket.get('assignee', 'Unassigned')
             issue_type = ticket['issue_type']
+            
+            # Determine Epic/Parent display - prioritize epic_link over parent
+            epic_parent = "-"
+            if ticket.get('epic_link'):
+                epic_key = ticket['epic_link']
+                epic_name = ticket_lookup.get(epic_key)
+                if epic_name:
+                    # Truncate long epic names for table display
+                    epic_name_short = epic_name[:30] + "..." if len(epic_name) > 30 else epic_name
+                    epic_parent = f"{epic_key}: {epic_name_short}"
+                else:
+                    epic_parent = epic_key
+            elif ticket.get('parent'):
+                parent_key = ticket['parent']
+                parent_name = ticket_lookup.get(parent_key)
+                if parent_name:
+                    # Truncate long parent names for table display
+                    parent_name_short = parent_name[:30] + "..." if len(parent_name) > 30 else parent_name
+                    epic_parent = f"{parent_key}: {parent_name_short}"
+                else:
+                    epic_parent = parent_key
+                
             created = cls.format_date(ticket['created']).split(' ')[0]  # Date only
             updated = cls.format_date(ticket['updated']).split(' ')[0]  # Date only
             due_date = cls.format_date(ticket.get('due_date')).split(' ')[0] if ticket.get('due_date') else "-"
@@ -175,8 +200,9 @@ class MarkdownReportGenerator:
             # Escape pipe characters in content
             summary = summary.replace('|', '\\|')
             assignee = assignee.replace('|', '\\|')
+            epic_parent = epic_parent.replace('|', '\\|') if epic_parent != "-" else epic_parent
             
-            md.append(f"| {key} | {summary} | {status} | {priority} | {assignee} | {issue_type} | {created} | {updated} | {due_date} |")
+            md.append(f"| {key} | {summary} | {status} | {priority} | {assignee} | {issue_type} | {epic_parent} | {created} | {updated} | {due_date} |")
         
         md.append("")
         
@@ -258,6 +284,35 @@ class TicketManager:
         self.jira = jira_client
         self.cache_file = cache_file
         self.ticket_cache = self.load_cache()
+    
+    @staticmethod
+    def _extract_epic_link(fields, epic_link_field):
+        """Extract epic link from Jira fields using the proper field identifier"""
+        try:
+            # Try the dynamically identified field first
+            if epic_link_field in fields:
+                epic_data = fields[epic_link_field]
+                if isinstance(epic_data, dict) and 'key' in epic_data:
+                    return epic_data['key']
+                elif isinstance(epic_data, str):
+                    return epic_data
+            
+            # Fallback to common field names
+            if fields.get("epic", {}).get("key"):
+                return fields["epic"]["key"]
+            
+            # Check for custom fields that might contain epic links
+            for field_key, field_value in fields.items():
+                if field_key.startswith('customfield_') and field_value:
+                    if isinstance(field_value, dict) and 'key' in field_value:
+                        # This might be an epic link
+                        return field_value['key']
+            
+            return None
+            
+        except Exception as e:
+            logger.warning(f"Error extracting epic link: {e}")
+            return None
         
     def load_cache(self) -> Dict:
         """Load ticket cache from file"""
@@ -283,6 +338,10 @@ class TicketManager:
         
         if progress_callback:
             progress_callback(5, "Fetching tickets from Jira API...")
+        
+        # Get epic field mapping for proper epic link extraction
+        epic_fields = self.jira.identify_epic_fields()
+        epic_link_field = epic_fields.get('epic_link', 'epic')
         
         issues = self.jira.get_all_project_issues()
         synced_tickets = []
@@ -320,7 +379,7 @@ class TicketManager:
                 "components": [c["name"] for c in fields.get("components", [])],
                 "labels": fields.get("labels", []),
                 "reporter": fields["reporter"]["displayName"] if fields.get("reporter") else None,
-                "epic_link": fields.get("epic", {}).get("key") if fields.get("epic") else None
+                "epic_link": self._extract_epic_link(fields, epic_link_field)
             }
             
             self.ticket_cache["tickets"][issue["key"]] = ticket_data

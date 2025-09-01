@@ -64,18 +64,21 @@ class JiraClient:
                 field_name = field.get('name', '').lower()
                 field_id = field.get('id', '')
                 
-                # Common patterns for epic fields
+                # Common patterns for epic fields - expanded detection
                 if 'epic name' in field_name or field_name == 'epic name':
                     epic_fields['epic_name'] = field_id
                 elif 'epic link' in field_name or field_name == 'epic link':
                     epic_fields['epic_link'] = field_id
                 elif 'story points' in field_name or field_name == 'story points':
                     epic_fields['story_points'] = field_id
+                elif field_name == 'epic':
+                    # Sometimes the field is just called 'epic'
+                    epic_fields['epic_link'] = field_id
                 elif field_id.startswith('customfield_') and 'epic' in field_name:
                     # Generic epic field detection
                     if 'name' in field_name:
                         epic_fields['epic_name'] = field_id
-                    elif 'link' in field_name:
+                    elif 'link' in field_name or field_name.endswith('epic'):
                         epic_fields['epic_link'] = field_id
                         
             logger.info(f"Identified epic fields: {epic_fields}")
