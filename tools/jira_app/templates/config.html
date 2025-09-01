@@ -1,0 +1,305 @@
+{% extends "base.html" %}
+
+{% block header %}Configuration{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-cog"></i> Jira Connection Settings
+                </h5>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="jira_url" class="form-label">Jira URL</label>
+                        <input type="url" 
+                               class="form-control" 
+                               id="jira_url" 
+                               name="jira_url" 
+                               placeholder="https://yourcompany.atlassian.net"
+                               value="{{ config.jira_url or '' }}"
+                               required>
+                        <div class="form-text">Your Jira instance URL (e.g., https://yourcompany.atlassian.net)</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="jira_username" class="form-label">Username/Email</label>
+                        <input type="email" 
+                               class="form-control" 
+                               id="jira_username" 
+                               name="jira_username" 
+                               placeholder="your.email@company.com"
+                               value="{{ config.jira_username or '' }}"
+                               required>
+                        <div class="form-text">Your Jira account email address</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="jira_api_token" class="form-label">API Token</label>
+                        <input type="password" 
+                               class="form-control" 
+                               id="jira_api_token" 
+                               name="jira_api_token" 
+                               placeholder="Your API Token"
+                               required>
+                        <div class="form-text">
+                            <a href="https://id.atlassian.com/manage-profile/security/api-tokens" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> Create API Token in Atlassian
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="project_key" class="form-label">Project Key</label>
+                        <input type="text" 
+                               class="form-control" 
+                               id="project_key" 
+                               name="project_key" 
+                               placeholder="GLO"
+                               value="{{ config.project_key or 'GLO' }}"
+                               required
+                               style="text-transform: uppercase;">
+                        <div class="form-text">Your Jira project key (default: GLO)</div>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="button" 
+                                class="btn btn-outline-primary me-md-2" 
+                                onclick="testConnection()">
+                            <i class="fas fa-plug"></i> Test Connection
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Save Configuration
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Confluence Configuration Card -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-file-alt"></i> Confluence Connection Settings
+                    <small class="text-muted">(Optional - defaults to Jira credentials)</small>
+                </h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="/confluence/config">
+                    <div class="mb-3">
+                        <label for="confluence_url" class="form-label">Confluence URL</label>
+                        <input type="url" 
+                               class="form-control" 
+                               id="confluence_url" 
+                               name="confluence_url" 
+                               placeholder="https://appsure.atlassian.net/wiki"
+                               value="{{ config.confluence_url or 'https://appsure.atlassian.net/wiki' }}">
+                        <div class="form-text">Your Confluence wiki URL. <strong>Defaults to:</strong> https://appsure.atlassian.net/wiki</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="confluence_username" class="form-label">Username/Email</label>
+                        <input type="email" 
+                               class="form-control" 
+                               id="confluence_username" 
+                               name="confluence_username" 
+                               placeholder="your.email@company.com"
+                               value="{{ config.confluence_username or config.jira_username or '' }}">
+                        <div class="form-text">Your Confluence account email. <strong>Defaults to:</strong> {{ config.jira_username or 'andrew@appsure.co.za' }}</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="confluence_api_token" class="form-label">API Token</label>
+                        <input type="password" 
+                               class="form-control" 
+                               id="confluence_api_token" 
+                               name="confluence_api_token" 
+                               placeholder="Your API Token">
+                        <div class="form-text"><strong>Defaults to your Jira API token.</strong> Leave blank to use the same token. <a href="https://id.atlassian.com/manage-profile/security/api-tokens" target="_blank">Create separate token</a></div>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="button" 
+                                class="btn btn-outline-primary me-md-2" 
+                                onclick="testConfluenceConnection()">
+                            <i class="fas fa-plug"></i> Test Connection
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Save Confluence Settings
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Instructions Card -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-info-circle"></i> Setup Instructions
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>1. Get Your Jira Details</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success"></i> Find your Jira URL (e.g., yourcompany.atlassian.net)</li>
+                            <li><i class="fas fa-check text-success"></i> Use your account email as username</li>
+                            <li><i class="fas fa-check text-success"></i> Get your project key from Jira</li>
+                        </ul>
+
+                        <h6>2. Create API Token</h6>
+                        <ol class="small">
+                            <li>Go to <a href="https://id.atlassian.com/manage-profile/security/api-tokens" target="_blank">Atlassian API Tokens</a></li>
+                            <li>Click "Create API token"</li>
+                            <li>Give it a name (e.g., "Jira Manager")</li>
+                            <li>Copy the token and paste it above</li>
+                        </ol>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>3. Project Permissions</h6>
+                        <p class="small">Make sure your account has permissions to:</p>
+                        <ul class="small">
+                            <li>Create issues in the project</li>
+                            <li>Edit issues in the project</li>
+                            <li>View project issues</li>
+                            <li>Manage project (if creating epics)</li>
+                        </ul>
+
+                        <div class="alert alert-warning small">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <strong>Note:</strong> API tokens are sensitive. Keep them secure and don't share them.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function testConnection() {
+    const url = document.getElementById('jira_url').value;
+    const username = document.getElementById('jira_username').value;
+    const token = document.getElementById('jira_api_token').value;
+    const projectKey = document.getElementById('project_key').value;
+
+    if (!url || !username || !token || !projectKey) {
+        alert('Please fill in all fields before testing connection.');
+        return;
+    }
+
+    const btn = event.target;
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Testing...';
+    btn.disabled = true;
+
+    // Create a temporary config to test
+    const testConfig = {
+        jira_url: url,
+        jira_username: username,
+        jira_api_token: token,
+        project_key: projectKey
+    };
+
+    // Simple test - try to authenticate
+    const auth = btoa(username + ':' + token);
+    
+    fetch(url + '/rest/api/2/myself', {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Basic ' + auth,
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            btn.innerHTML = '<i class="fas fa-check text-success"></i> Connection Successful';
+            btn.className = 'btn btn-success me-md-2';
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.className = 'btn btn-outline-primary me-md-2';
+                btn.disabled = false;
+            }, 3000);
+        } else {
+            throw new Error('Connection failed: ' + response.status);
+        }
+    })
+    .catch(error => {
+        console.error('Connection test failed:', error);
+        btn.innerHTML = '<i class="fas fa-times text-danger"></i> Connection Failed';
+        btn.className = 'btn btn-danger me-md-2';
+        setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.className = 'btn btn-outline-primary me-md-2';
+            btn.disabled = false;
+        }, 3000);
+        
+        alert('Connection failed. Please check your settings and try again.\n\nError: ' + error.message);
+    });
+}
+
+// Auto-uppercase project key
+document.getElementById('project_key').addEventListener('input', function() {
+    this.value = this.value.toUpperCase();
+});
+
+function testConfluenceConnection() {
+    const url = document.getElementById('confluence_url').value;
+    const username = document.getElementById('confluence_username').value;
+    const token = document.getElementById('confluence_api_token').value;
+
+    if (!url || !username || !token) {
+        alert('Please fill in all Confluence fields before testing connection.');
+        return;
+    }
+
+    const btn = event.target;
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Testing...';
+    btn.disabled = true;
+
+    // Simple test - try to authenticate
+    const auth = btoa(username + ':' + token);
+    
+    fetch(url + '/rest/api/space', {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Basic ' + auth,
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            btn.innerHTML = '<i class="fas fa-check text-success"></i> Connection Successful';
+            btn.className = 'btn btn-success me-md-2';
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.className = 'btn btn-outline-primary me-md-2';
+                btn.disabled = false;
+            }, 3000);
+        } else {
+            throw new Error('Connection failed: ' + response.status);
+        }
+    })
+    .catch(error => {
+        console.error('Connection test failed:', error);
+        btn.innerHTML = '<i class="fas fa-times text-danger"></i> Connection Failed';
+        btn.className = 'btn btn-danger me-md-2';
+        setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.className = 'btn btn-outline-primary me-md-2';
+            btn.disabled = false;
+        }, 3000);
+        
+        alert('Connection failed. Please check your settings and try again.\n\nError: ' + error.message);
+    });
+}
+</script>
+{% endblock %}

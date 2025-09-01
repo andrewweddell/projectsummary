@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sed:*)",
+      "Bash(chmod:*)",
+      "Bash(python test_markdown_export.py:*)",
+      "Bash(source:*)",
+      "Bash(python:*)",
+      "Bash(timeout:*)",
+      "Bash(grep:*)",
+      "Bash(mkdir:*)",
+      "Bash(mv:*)",
+      "Bash(pip install:*)",
+      "Bash(pkill:*)",
+      "Bash(curl:*)",
+      "Bash(./start_app.sh:*)",
+      "Bash(./venv/bin/python:*)",
+      "Bash(venv/bin/python test_story_creation.py:*)",
+      "Bash(venv/bin/python3:*)",
+      "Bash(/Users/andrewweddell/andrewweddell/appsure_sites/globalunderwriting/tools/jira_app/venv/bin/python3 test_story_creation.py)",
+      "WebSearch",
+      "Bash(/opt/homebrew/bin/python app.py)",
+      "Bash(pip3 install:*)",
+      "Read(/tmp/**)",
+      "Read(/tmp/**)",
+      "Read(/tmp/**)",
+      "Bash(git init:*)",
+      "Bash(git remote add:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

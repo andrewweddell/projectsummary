@@ -1,0 +1,9 @@
+{
+  "jira_url": "https://appsure.atlassian.net",
+  "jira_username": "your.email@company.com",
+  "jira_api_token": "your-jira-api-token-here",
+  "project_key": "GLO",
+  "confluence_url": "https://appsure.atlassian.net/wiki",
+  "confluence_username": "your.email@company.com",
+  "confluence_api_token": "your-confluence-api-token-here"
+}

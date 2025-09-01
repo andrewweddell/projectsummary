@@ -1,0 +1,240 @@
+{% extends "base.html" %}
+
+{% block header %}{{ ticket.key }} - {{ ticket.summary }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Ticket Details -->
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="mb-0">
+                        <strong>{{ ticket.key }}</strong>
+                        {% if ticket.issue_type == 'Epic' %}
+                            <span class="badge bg-purple text-white">
+                                <i class="fas fa-flag"></i> Epic
+                            </span>
+                        {% elif ticket.issue_type == 'Story' %}
+                            <span class="badge bg-primary">
+                                <i class="fas fa-book"></i> Story
+                            </span>
+                        {% else %}
+                            <span class="badge bg-secondary">
+                                <i class="fas fa-check-square"></i> {{ ticket.issue_type }}
+                            </span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div>
+                    <a href="{{ url_for('edit_ticket', ticket_key=ticket.key) }}" class="btn btn-primary btn-sm">
+                        <i class="fas fa-edit"></i> Edit Ticket
+                    </a>
+                    <a href="{{ url_for('index') }}" class="btn btn-secondary btn-sm">
+                        <i class="fas fa-arrow-left"></i> Back to List
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <h4 class="mb-3">{{ ticket.summary }}</h4>
+                
+                {% if ticket.description %}
+                    <div class="mb-4">
+                        <h6>Description</h6>
+                        <div class="border rounded p-3 bg-light">
+                            {{ ticket.description | nl2br | safe }}
+                        </div>
+                    </div>
+                {% endif %}
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <h6>Details</h6>
+                        <table class="table table-sm">
+                            <tr>
+                                <td><strong>Status:</strong></td>
+                                <td>
+                                    {% set status_class = 'secondary' %}
+                                    {% if 'done' in ticket.status.lower() or 'closed' in ticket.status.lower() %}
+                                        {% set status_class = 'success' %}
+                                    {% elif 'progress' in ticket.status.lower() %}
+                                        {% set status_class = 'warning' %}
+                                    {% elif 'to do' in ticket.status.lower() or 'open' in ticket.status.lower() %}
+                                        {% set status_class = 'info' %}
+                                    {% endif %}
+                                    <span class="badge bg-{{ status_class }}">{{ ticket.status }}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Type:</strong></td>
+                                <td>{{ ticket.issue_type }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Assignee:</strong></td>
+                                <td>
+                                    {% if ticket.assignee %}
+                                        {{ ticket.assignee }}
+                                    {% else %}
+                                        <em class="text-muted">Unassigned</em>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% if ticket.parent %}
+                            <tr>
+                                <td><strong>Parent:</strong></td>
+                                <td>
+                                    <a href="{{ url_for('view_ticket', ticket_key=ticket.parent) }}">
+                                        {{ ticket.parent }}
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endif %}
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Timestamps</h6>
+                        <table class="table table-sm">
+                            <tr>
+                                <td><strong>Created:</strong></td>
+                                <td>{{ ticket.created[:19] if ticket.created else 'N/A' }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Updated:</strong></td>
+                                <td>{{ ticket.updated[:19] if ticket.updated else 'N/A' }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="col-md-4">
+        <!-- Quick Actions -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-bolt"></i> Quick Actions
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    <a href="{{ url_for('edit_ticket', ticket_key=ticket.key) }}" class="btn btn-primary btn-sm">
+                        <i class="fas fa-edit"></i> Edit This Ticket
+                    </a>
+                    <button class="btn btn-info btn-sm" onclick="openInJira()">
+                        <i class="fas fa-external-link-alt"></i> Open in Jira
+                    </button>
+                    <button class="btn btn-secondary btn-sm" onclick="copyTicketKey()">
+                        <i class="fas fa-copy"></i> Copy Key
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status History -->
+        <div class="card">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-history"></i> Status History
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker bg-primary"></div>
+                        <div class="timeline-content">
+                            <h6 class="timeline-title">{{ ticket.status }}</h6>
+                            <p class="timeline-text">Current status</p>
+                            <small class="text-muted">{{ ticket.updated[:19] if ticket.updated else 'N/A' }}</small>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker bg-success"></div>
+                        <div class="timeline-content">
+                            <h6 class="timeline-title">Created</h6>
+                            <p class="timeline-text">Ticket was created</p>
+                            <small class="text-muted">{{ ticket.created[:19] if ticket.created else 'N/A' }}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<style>
+.bg-purple { 
+    background-color: #6f42c1 !important; 
+}
+
+.timeline {
+    position: relative;
+    padding-left: 30px;
+}
+
+.timeline:before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #dee2e6;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -22px;
+    top: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+.timeline-content {
+    padding-left: 20px;
+}
+
+.timeline-title {
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.timeline-text {
+    margin-bottom: 5px;
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+</style>
+
+<script>
+function copyTicketKey() {
+    navigator.clipboard.writeText('{{ ticket.key }}').then(() => {
+        const btn = event.target;
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        btn.className = 'btn btn-success btn-sm';
+        setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.className = 'btn btn-secondary btn-sm';
+        }, 2000);
+    });
+}
+
+function openInJira() {
+    // You would need to construct the Jira URL based on your instance
+    // For now, show an alert
+    alert('To open in Jira, go to: [Your Jira URL]/browse/{{ ticket.key }}');
+}
+</script>
+{% endblock %}

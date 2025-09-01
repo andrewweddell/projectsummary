@@ -1,0 +1,261 @@
+{% extends "base.html" %}
+
+{% block header %}Edit Ticket - {{ ticket.key }}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="fas fa-edit"></i> Edit Ticket - {{ ticket.key }}
+                </h5>
+                <div>
+                    <a href="{{ url_for('view_ticket', ticket_key=ticket.key) }}" class="btn btn-secondary btn-sm">
+                        <i class="fas fa-eye"></i> View
+                    </a>
+                    <a href="{{ url_for('index') }}" class="btn btn-outline-secondary btn-sm">
+                        <i class="fas fa-arrow-left"></i> Back to List
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <form method="POST" id="editTicketForm">
+                    <div class="mb-3">
+                        <label for="summary" class="form-label">Summary <span class="text-danger">*</span></label>
+                        <input type="text" 
+                               class="form-control" 
+                               id="summary" 
+                               name="summary" 
+                               value="{{ ticket.summary }}"
+                               required>
+                        <div class="form-text">Brief description of the ticket</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" 
+                                  id="description" 
+                                  name="description" 
+                                  rows="8"
+                                  placeholder="Detailed description of the ticket">{{ ticket.description or '' }}</textarea>
+                        <div class="form-text">Detailed information about the ticket</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="status" class="form-label">Status</label>
+                        <select class="form-select" id="status" name="status">
+                            <option value="">Keep current status ({{ ticket.status }})</option>
+                            <option value="To Do" {% if ticket.status == 'To Do' %}selected{% endif %}>To Do</option>
+                            <option value="In Progress" {% if ticket.status == 'In Progress' %}selected{% endif %}>In Progress</option>
+                            <option value="Done" {% if ticket.status == 'Done' %}selected{% endif %}>Done</option>
+                            <option value="Blocked" {% if ticket.status == 'Blocked' %}selected{% endif %}>Blocked</option>
+                        </select>
+                        <div class="form-text">Current status: <strong>{{ ticket.status }}</strong></div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Ticket Type</label>
+                            <div class="form-control-plaintext">
+                                {% if ticket.issue_type == 'Epic' %}
+                                    <span class="badge bg-purple text-white">
+                                        <i class="fas fa-flag"></i> Epic
+                                    </span>
+                                {% elif ticket.issue_type == 'Story' %}
+                                    <span class="badge bg-primary">
+                                        <i class="fas fa-book"></i> Story
+                                    </span>
+                                {% else %}
+                                    <span class="badge bg-secondary">
+                                        <i class="fas fa-check-square"></i> {{ ticket.issue_type }}
+                                    </span>
+                                {% endif %}
+                            </div>
+                            <div class="form-text">Type cannot be changed here</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Assignee</label>
+                            <div class="form-control-plaintext">
+                                {% if ticket.assignee %}
+                                    {{ ticket.assignee }}
+                                {% else %}
+                                    <em class="text-muted">Unassigned</em>
+                                {% endif %}
+                            </div>
+                            <div class="form-text">Assignee must be changed in Jira</div>
+                        </div>
+                    </div>
+
+                    {% if ticket.parent %}
+                    <div class="mb-3">
+                        <label class="form-label">Parent Ticket</label>
+                        <div class="form-control-plaintext">
+                            <a href="{{ url_for('view_ticket', ticket_key=ticket.parent) }}">
+                                {{ ticket.parent }}
+                            </a>
+                        </div>
+                        <div class="form-text">Parent relationship cannot be changed here</div>
+                    </div>
+                    {% endif %}
+
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="form-label">Created</label>
+                                <div class="form-control-plaintext">
+                                    {{ ticket.created[:19] if ticket.created else 'N/A' }}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Last Updated</label>
+                                <div class="form-control-plaintext">
+                                    {{ ticket.updated[:19] if ticket.updated else 'N/A' }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="button" class="btn btn-outline-secondary me-md-2" onclick="resetForm()">
+                            <i class="fas fa-undo"></i> Reset
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Update Ticket
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Preview Card -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-eye"></i> Preview Changes
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Current</h6>
+                        <div class="border rounded p-3 bg-light">
+                            <strong>{{ ticket.summary }}</strong><br>
+                            <small class="text-muted">{{ ticket.description[:100] }}{% if ticket.description and ticket.description|length > 100 %}...{% endif %}</small><br>
+                            <span class="badge bg-secondary mt-1">{{ ticket.status }}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Preview</h6>
+                        <div class="border rounded p-3 bg-info bg-opacity-10" id="preview">
+                            <strong id="previewSummary">{{ ticket.summary }}</strong><br>
+                            <small class="text-muted" id="previewDescription">{{ ticket.description[:100] }}{% if ticket.description and ticket.description|length > 100 %}...{% endif %}</small><br>
+                            <span class="badge bg-secondary mt-1" id="previewStatus">{{ ticket.status }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<style>
+.bg-purple { 
+    background-color: #6f42c1 !important; 
+}
+</style>
+
+<script>
+// Store original values
+const originalValues = {
+    summary: '{{ ticket.summary }}',
+    description: '{{ ticket.description or "" }}',
+    status: '{{ ticket.status }}'
+};
+
+// Update preview when form changes
+function updatePreview() {
+    const summary = document.getElementById('summary').value || originalValues.summary;
+    const description = document.getElementById('description').value || originalValues.description;
+    const status = document.getElementById('status').value || originalValues.status;
+    
+    document.getElementById('previewSummary').textContent = summary;
+    document.getElementById('previewDescription').textContent = description.substring(0, 100) + (description.length > 100 ? '...' : '');
+    
+    const statusBadge = document.getElementById('previewStatus');
+    statusBadge.textContent = status;
+    
+    // Update status badge color
+    statusBadge.className = 'badge mt-1';
+    if (status.toLowerCase().includes('done') || status.toLowerCase().includes('closed')) {
+        statusBadge.classList.add('bg-success');
+    } else if (status.toLowerCase().includes('progress')) {
+        statusBadge.classList.add('bg-warning');
+    } else if (status.toLowerCase().includes('to do') || status.toLowerCase().includes('open')) {
+        statusBadge.classList.add('bg-info');
+    } else {
+        statusBadge.classList.add('bg-secondary');
+    }
+}
+
+// Add event listeners
+document.getElementById('summary').addEventListener('input', updatePreview);
+document.getElementById('description').addEventListener('input', updatePreview);
+document.getElementById('status').addEventListener('change', updatePreview);
+
+function resetForm() {
+    document.getElementById('summary').value = originalValues.summary;
+    document.getElementById('description').value = originalValues.description;
+    document.getElementById('status').value = '';
+    updatePreview();
+}
+
+// Form submission
+document.getElementById('editTicketForm').addEventListener('submit', function(e) {
+    const btn = document.querySelector('button[type="submit"]');
+    const originalText = btn.innerHTML;
+    
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Updating...';
+    btn.disabled = true;
+    
+    // The form will submit normally, but we show a loading state
+    setTimeout(() => {
+        if (btn.disabled) { // If still on page (error occurred)
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+        }
+    }, 10000);
+});
+
+// Character counter for description
+const descriptionField = document.getElementById('description');
+const maxLength = 2000; // Typical Jira limit
+
+function updateCharCount() {
+    const length = descriptionField.value.length;
+    let counter = document.getElementById('charCounter');
+    
+    if (!counter) {
+        counter = document.createElement('div');
+        counter.id = 'charCounter';
+        counter.className = 'form-text';
+        descriptionField.parentNode.appendChild(counter);
+    }
+    
+    counter.textContent = `${length}/${maxLength} characters`;
+    
+    if (length > maxLength) {
+        counter.className = 'form-text text-danger';
+        descriptionField.classList.add('is-invalid');
+    } else {
+        counter.className = 'form-text text-muted';
+        descriptionField.classList.remove('is-invalid');
+    }
+}
+
+descriptionField.addEventListener('input', updateCharCount);
+updateCharCount(); // Initial count
+</script>
+{% endblock %}

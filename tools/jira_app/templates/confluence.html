@@ -1,0 +1,378 @@
+{% extends "base.html" %}
+
+{% block title %}Confluence Pages - GLO Space{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <nav class="col-md-2 d-md-block bg-light sidebar">
+            <div class="position-sticky pt-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('index') }}">
+                            <i class="fas fa-home"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ url_for('confluence_pages') }}">
+                            <i class="fas fa-file-alt"></i> Confluence
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('config') }}">
+                            <i class="fas fa-cog"></i> Configuration
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main content -->
+        <main class="col-md-10 ms-sm-auto px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">
+                    <i class="fas fa-file-alt text-primary"></i> Confluence Pages - GLO Space
+                </h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <button type="button" class="btn btn-primary" id="processBtn" onclick="processSelectedPages()">
+                        <i class="fas fa-download"></i> Process Selected Pages
+                    </button>
+                </div>
+            </div>
+
+            <!-- Flash messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ 'danger' if category == 'error' else category }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <!-- Page selection info -->
+            <div class="alert alert-info mb-3">
+                <i class="fas fa-info-circle"></i> Select pages to export. The selected pages will be downloaded to a versioned folder for offline reading.
+                <div class="mt-2">
+                    <strong>Total Pages:</strong> {{ pages|length }} | 
+                    <strong>Selected:</strong> <span id="selectedCount">0</span>
+                </div>
+            </div>
+
+            <!-- Pages Table -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="mb-0">Available Pages</h5>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                                <input type="text" class="form-control" id="searchInput" placeholder="Search pages...">
+                                <button class="btn btn-outline-secondary" type="button" onclick="clearSearch()">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="pagesTable">
+                            <thead>
+                                <tr>
+                                    <th width="40">
+                                        <input type="checkbox" class="form-check-input" id="selectAll" onchange="toggleSelectAll()">
+                                    </th>
+                                    <th>Title</th>
+                                    <th>Last Modified</th>
+                                    <th>Modified By</th>
+                                    <th>Version</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for page in pages %}
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="form-check-input page-checkbox" 
+                                               value="{{ page.id }}" 
+                                               data-title="{{ page.title }}"
+                                               onchange="updateSelectedCount()">
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <strong>{{ page.title }}</strong>
+                                            {% if page.ancestors %}
+                                            <div class="text-muted small">
+                                                <i class="fas fa-folder-open"></i>
+                                                {% for ancestor in page.ancestors %}
+                                                    {{ ancestor.title }} {% if not loop.last %}/{% endif %}
+                                                {% endfor %}
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {% if page.last_modified %}
+                                        <span class="text-muted">{{ page.last_modified|truncate(19, True, '') }}</span>
+                                        {% else %}
+                                        -
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ page.modified_by or '-' }}</td>
+                                    <td>
+                                        <span class="badge bg-secondary">v{{ page.version or '1' }}</span>
+                                    </td>
+                                    <td>
+                                        {% if page.url %}
+                                        <a href="{{ page.url }}" target="_blank" class="btn btn-sm btn-outline-primary" 
+                                           title="View in Confluence">
+                                            <i class="fas fa-external-link-alt"></i>
+                                        </a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    {% if not pages %}
+                    <div class="text-center py-5 text-muted">
+                        <i class="fas fa-folder-open fa-3x mb-3"></i>
+                        <p>No pages found in the GLO space.</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- Progress Modal -->
+<div class="modal fade" id="progressModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-spinner fa-spin"></i> <span id="progressTitle">Processing...</span>
+                </h5>
+            </div>
+            <div class="modal-body">
+                <div class="progress mb-3" style="height: 25px;">
+                    <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" 
+                         role="progressbar" style="width: 0%">0%</div>
+                </div>
+                <div id="progressMessage" class="text-muted"></div>
+                <div id="progressDetails" class="mt-3"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="closeProgressBtn" 
+                        onclick="closeProgressModal()" style="display: none;">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Search functionality
+document.getElementById('searchInput').addEventListener('keyup', function() {
+    const searchTerm = this.value.toLowerCase();
+    const rows = document.querySelectorAll('#pagesTable tbody tr');
+    
+    rows.forEach(row => {
+        const title = row.querySelector('[data-title]')?.getAttribute('data-title')?.toLowerCase() || '';
+        const text = row.textContent.toLowerCase();
+        
+        if (title.includes(searchTerm) || text.includes(searchTerm)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+});
+
+function clearSearch() {
+    document.getElementById('searchInput').value = '';
+    const rows = document.querySelectorAll('#pagesTable tbody tr');
+    rows.forEach(row => row.style.display = '');
+}
+
+// Selection functionality
+function toggleSelectAll() {
+    const selectAll = document.getElementById('selectAll');
+    const checkboxes = document.querySelectorAll('.page-checkbox');
+    
+    checkboxes.forEach(checkbox => {
+        if (checkbox.closest('tr').style.display !== 'none') {
+            checkbox.checked = selectAll.checked;
+        }
+    });
+    
+    updateSelectedCount();
+}
+
+function updateSelectedCount() {
+    const selected = document.querySelectorAll('.page-checkbox:checked').length;
+    document.getElementById('selectedCount').textContent = selected;
+    
+    const processBtn = document.getElementById('processBtn');
+    processBtn.disabled = selected === 0;
+}
+
+// Process selected pages
+function processSelectedPages() {
+    const selectedPages = [];
+    const checkboxes = document.querySelectorAll('.page-checkbox:checked');
+    
+    if (checkboxes.length === 0) {
+        alert('Please select at least one page to process.');
+        return;
+    }
+    
+    checkboxes.forEach(checkbox => {
+        selectedPages.push(checkbox.value);
+    });
+    
+    // Show progress modal
+    const modal = new bootstrap.Modal(document.getElementById('progressModal'));
+    modal.show();
+    
+    document.getElementById('progressTitle').textContent = 'Exporting Confluence Pages';
+    document.getElementById('progressMessage').textContent = `Preparing to export ${selectedPages.length} pages...`;
+    
+    // Send request to process pages
+    const formData = new FormData();
+    selectedPages.forEach(pageId => {
+        formData.append('selected_pages', pageId);
+    });
+    
+    fetch('/confluence/process', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            throw new Error(data.error);
+        }
+        
+        // Start monitoring progress
+        if (data.operation_id) {
+            monitorProgress(data.operation_id);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        document.getElementById('progressMessage').innerHTML = 
+            `<div class="alert alert-danger">Error: ${error.message}</div>`;
+        document.getElementById('closeProgressBtn').style.display = 'block';
+    });
+}
+
+// Progress monitoring
+function monitorProgress(operationId) {
+    const eventSource = new EventSource(`/progress/${operationId}`);
+    
+    eventSource.onmessage = function(event) {
+        const data = JSON.parse(event.data);
+        
+        if (data.error) {
+            console.error('Progress error:', data.error);
+            eventSource.close();
+            return;
+        }
+        
+        if (data.keepalive) {
+            return;
+        }
+        
+        // Update progress bar
+        const progress = Math.round((data.current_step / data.total_steps) * 100);
+        const progressBar = document.getElementById('progressBar');
+        progressBar.style.width = progress + '%';
+        progressBar.textContent = progress + '%';
+        
+        // Update message
+        if (data.message) {
+            document.getElementById('progressMessage').textContent = data.message;
+        }
+        
+        // Update details
+        if (data.details) {
+            let detailsHtml = '<div class="small">';
+            if (data.details.current_page) {
+                detailsHtml += `<p>Processing page ID: ${data.details.current_page}</p>`;
+            }
+            detailsHtml += '</div>';
+            document.getElementById('progressDetails').innerHTML = detailsHtml;
+        }
+        
+        // Handle completion
+        if (data.status === 'completed') {
+            eventSource.close();
+            progressBar.classList.remove('progress-bar-animated');
+            progressBar.classList.add('bg-success');
+            
+            if (data.result && data.result.folder) {
+                document.getElementById('progressMessage').innerHTML = 
+                    `<div class="alert alert-success">
+                        <i class="fas fa-check-circle"></i> Export completed successfully!<br>
+                        <strong>Location:</strong> ${data.result.folder}<br>
+                        <strong>Pages exported:</strong> ${data.result.exported_files ? data.result.exported_files.length : 0}
+                    </div>`;
+            }
+            
+            document.getElementById('closeProgressBtn').style.display = 'block';
+        }
+        
+        // Handle failure
+        if (data.status === 'failed') {
+            eventSource.close();
+            progressBar.classList.remove('progress-bar-animated');
+            progressBar.classList.add('bg-danger');
+            
+            document.getElementById('progressMessage').innerHTML = 
+                `<div class="alert alert-danger">
+                    <i class="fas fa-exclamation-circle"></i> Export failed: ${data.message || 'Unknown error'}
+                </div>`;
+            
+            document.getElementById('closeProgressBtn').style.display = 'block';
+        }
+    };
+    
+    eventSource.onerror = function(error) {
+        console.error('EventSource error:', error);
+        eventSource.close();
+        
+        document.getElementById('progressMessage').innerHTML = 
+            `<div class="alert alert-warning">Connection lost. The export may still be running in the background.</div>`;
+        document.getElementById('closeProgressBtn').style.display = 'block';
+    };
+}
+
+function closeProgressModal() {
+    const modal = bootstrap.Modal.getInstance(document.getElementById('progressModal'));
+    modal.hide();
+    
+    // Reset modal
+    document.getElementById('progressBar').style.width = '0%';
+    document.getElementById('progressBar').textContent = '0%';
+    document.getElementById('progressBar').classList.remove('bg-success', 'bg-danger');
+    document.getElementById('progressBar').classList.add('progress-bar-animated');
+    document.getElementById('progressMessage').textContent = '';
+    document.getElementById('progressDetails').innerHTML = '';
+    document.getElementById('closeProgressBtn').style.display = 'none';
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    updateSelectedCount();
+});
+</script>
+{% endblock %}

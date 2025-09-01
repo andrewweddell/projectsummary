@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip install:*)",
+      "Bash(python:*)",
+      "Bash(pip3 install:*)",
+      "Bash(/opt/homebrew/opt/python@3.13/bin/python3.13 -m pip install Flask==2.3.3 requests==2.31.0 python-dotenv==1.0.0)",
+      "Bash(source:*)",
+      "Bash(curl:*)",
+      "Read(//Users/andrewweddell/andrewweddell/appsure_sites/globalunderwriting/**)",
+      "Bash(claude code --reload-agents)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
